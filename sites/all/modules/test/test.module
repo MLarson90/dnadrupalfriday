@@ -31,7 +31,7 @@
     $Dna = str_split($dna);
     $result = "";
     for($i = 0; $i < count($Dna); $i++){
-      if(($Dna != "A") || ($Dna != "T") || ($Dna != "C") || ($Dna != "G")){
+      if(($Dna[$i] != "A") || ($Dna[$i] != "T") || ($Dna[$i] != "C") || ($Dna[$i] != "G")){
         return "<p>Thats not DNA</p>";
       }else if($Dna[$i] == "A"){
          $result .= "T";

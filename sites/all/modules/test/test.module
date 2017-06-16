@@ -1,16 +1,71 @@
 
 <?php
-function greeting_menu() {
-    $items = array();
-    $items['hello_friend'] = array(
-        'title' => "Hello Friend!",
-        'page callback' => 'say_hello',
-        'access callback' => TRUE,
-        'type' => MENU_NORMAL_ITEM,
-    );
-    return $items;
-}
 
-function say_hello() {
-    return '<p>hello</p>';
-}
+ function dna_menu(){
+   $items = array();
+   $items['dna'] = array(
+     'title' => "Calculate dna",
+     'type' => MENU_NORMAL_ITEM,
+     'access callback' => TRUE,
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('dna_form'),
+   );
+   return $items;
+ }
+ function dna_form(){
+   $form = array();
+   $form['dna'] = array(
+     '#title' => 'DNA',
+     '#type' => 'textfield',
+     '#description' => t('Enter DNA'),
+   );
+
+   $form['submit'] = array(
+     '#type' => 'submit',
+     '#value' => 'Calculate',
+   );
+   return $form;
+ }
+ function dna_form_submit($form, &$form_state){
+    $dna = $form_state['values']['dna'];
+    $Dna = str_split($dna);
+    $result = "";
+    for($i = 0; $i < count($Dna); $i++){
+      if($Dna[$i] == "A"){
+         $result .= "T";
+      }else if($Dna[$i] == "T"){
+        $result .= "A";
+      }else if($Dna[$i] == "G"){
+        $result .= "C";
+      }else if($Dna[$i] == "C"){
+        $result .= "G";
+      }
+    }
+    return $result;
+    $_SESSION['dna'] = $result;
+    $form_state['redirect'] = 'dna_success_page';
+  }
+
+  function sum_success(){
+   $result = $_SESSION['dna'];
+   return $result;
+ }
+
+ function dna_form_test($input){
+   $Dna = str_split($input);
+   $result = "";
+   for($i = 0; $i < count($Dna); $i++){
+     if($Dna[$i] == "A"){
+        $result .= "T";
+     }else if($Dna[$i] == "T"){
+       $result .= "A";
+     }else if($Dna[$i] == "G"){
+       $result .= "C";
+     }else if($Dna[$i] == "C"){
+       $result .= "G";
+     }
+   }
+   return $result;
+   $_SESSION['dna'] = $result;
+   $form_state['redirect'] = 'dna_success_page';
+ }

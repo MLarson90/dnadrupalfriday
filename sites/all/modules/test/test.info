@@ -1,6 +1,6 @@
 
 name = Test
-description = Display greetings.
+description = DNA.
 package = Epicodus Examples
 core = 7.x
 files[] = test.module

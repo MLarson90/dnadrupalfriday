@@ -3,17 +3,17 @@
 class TestTest extends DrupalWebTestCase {
     public static function getInfo(){
       return array(
-        'name' => 'Gretting test',
-        'description' => 'Test the Greeting module',
+        'name' => 'Dna test',
+        'description' => 'Test the Dna module',
         'group' => 'Epicodus Examples Tests',
       );
     }
-    public function setUp(){
-      parent::setUp(array('greeting'));
-    }
-    public function testGrettingNavigation(){
-      $this->drupalGet('hello_friend');
 
-    }
-
+    function testDna()
+    {
+        $input = 'ATCG';
+        $result = dna_form_test($input);
+        $expected_output = 'TAGC';
+        $this->assertEqual($result, $expected_output);
+      }
 }

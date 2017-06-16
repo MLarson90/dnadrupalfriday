@@ -1,0 +1,8 @@
+
+name = Test
+description = Display greetings.
+package = Epicodus Examples
+core = 7.x
+files[] = test.module
+files[] = test.test
+dependencies[] = simpletest

@@ -4,7 +4,7 @@
  function dna_menu(){
    $items = array();
    $items['dna'] = array(
-     'title' => "Calculate dna",
+     'title' => "Calculate DNA",
      'type' => MENU_NORMAL_ITEM,
      'access callback' => TRUE,
      'page callback' => 'drupal_get_form',

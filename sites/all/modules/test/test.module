@@ -1,19 +1,23 @@
 
 <?php
 
- function dna_menu(){
-   $items = array();
+ function test_menu(){
    $items['dna'] = array(
      'title' => "Calculate DNA",
      'type' => MENU_NORMAL_ITEM,
      'access callback' => TRUE,
      'page callback' => 'drupal_get_form',
-     'page arguments' => array('dna_form'),
+     'page arguments' => array('test_form'),
+   );
+   $items['test_success_page'] = array(
+     'title' => "Dna Success",
+     'type' => MENU_CALLBACK,
+     'access callback' => TRUE,
+     'page callback' => 'test_success',
    );
    return $items;
  }
- function dna_form(){
-   $form = array();
+ function test_form(){
    $form['dna'] = array(
      '#title' => 'DNA',
      '#type' => 'textfield',
@@ -26,14 +30,12 @@
    );
    return $form;
  }
- function dna_form_submit($form, &$form_state){
+ function test_form_submit($form, &$form_state){
     $dna = $form_state['values']['dna'];
     $Dna = str_split($dna);
     $result = "";
     for($i = 0; $i < count($Dna); $i++){
-      if(($Dna[$i] != "A") || ($Dna[$i] != "T") || ($Dna[$i] != "C") || ($Dna[$i] != "G")){
-        return "<p>Thats not DNA</p>";
-      }else if($Dna[$i] == "A"){
+      if($Dna[$i] == "A"){
          $result .= "T";
       }else if($Dna[$i] == "T"){
         $result .= "A";
@@ -41,14 +43,16 @@
         $result .= "C";
       }else if($Dna[$i] == "C"){
         $result .= "G";
+      }else{
+        $result = "<p>Thats not DNA</p>";
       }
     }
-    return $result;
+    // return $result;
     $_SESSION['dna'] = $result;
-    $form_state['redirect'] = 'dna_success_page';
+    $form_state['redirect'] = 'test_success_page';
   }
 
-  function sum_success(){
+  function test_success(){
    $result = $_SESSION['dna'];
    return $result;
  }
@@ -65,9 +69,11 @@
        $result .= "C";
      }else if($Dna[$i] == "C"){
        $result .= "G";
+     }else{
+       $result = '<p>Thats not DNA</p>';
      }
    }
    return $result;
    $_SESSION['dna'] = $result;
-   $form_state['redirect'] = 'dna_success_page';
+   $form_state['redirect'] = 'test_success_page';
  }
